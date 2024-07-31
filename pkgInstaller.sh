@@ -18,7 +18,7 @@
 # Space Complexity :
 #
 ###################################
-
+set -x
 set -e 
 set -o pipefail 
 
