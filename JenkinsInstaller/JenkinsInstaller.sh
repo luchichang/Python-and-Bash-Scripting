@@ -15,6 +15,31 @@
 #set -e 
 #set -x
 
+
+
+
+#Installing the Dependencies of Jenkins
+
+echo "Before Installing Jenkins have you installed the Java package to the system"
+
+sleep 2
+
+read -p "enter [Y/N]: " InstallDep
+
+if [ "$InstallDep" == "y" ] || [ "$InstallDep" == "Y" ];then
+	sleep 
+
+elif [ "$InstallDep" == "n" ] || [ "$InstallDep" == "N" ];then  
+	echo "Installing the  Dependency Java  "
+	sudo apt install default-jdk -y
+else
+	echo "             Bad Input exiting."
+	exit 2
+fi
+
+
+
+
 #variable for checking is repo added and package installed
 isRepoAdded=$(find /etc/apt/sources.list.d/ -iname "jenkins.list")
 isPkgInstalled=$( apt list --installed 2> /dev/null | grep -i "^jenkins/" ) # if none found throws exit code 1
