@@ -20,19 +20,19 @@
 
 #Installing the Dependencies of Jenkins
 
-echo "Before Installing Jenkins have you installed the Java package to the system"
+echo "Before Installing Jenkins have you installed the Java package in the system"
 
-sleep 2
+sleep 1
 
-read -p "enter [Y/N]: " InstallDep
+read -p "Enter [Y/N]: " InstallDep
 
-if [ "$InstallDep" == "y" ] || [ "$InstallDep" == "Y" ];then
-	sleep 
+ 
 
-elif [ "$InstallDep" == "n" ] || [ "$InstallDep" == "N" ];then  
+if [ "$InstallDep" == "n" ] || [ "$InstallDep" == "N" ];then  
 	echo "Installing the  Dependency Java  "
 	sudo apt install default-jdk -y
-else
+        echo " Java Installed Success Fully"	
+elif [ "$InstallDep" != "y" ] && [ "$InstallDep" != "Y" ];then
 	echo "             Bad Input exiting."
 	exit 2
 fi
@@ -67,5 +67,8 @@ elif  [ -n "$isRepoAdded" ] && [ -z "$isPkgInstalled" ]; then
         echo "****** Jenkins Installed Successfully! ********"
 else 
 	echo " Jenkins is Already Installed. "
+	echo "Reloading the Jenkins.Service."
+	sudo systemctl reload jenkins.service
+	echo "*********Jenkins tool is ready to use!*****"
 fi	
 
