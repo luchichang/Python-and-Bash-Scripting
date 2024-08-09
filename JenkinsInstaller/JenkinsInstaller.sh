@@ -7,7 +7,7 @@
 #Date : 07.08.2024
 #
 #Description : Adding the repo and installing the  Jenkins Package 
-#Version : 1
+#Version : 2.0.1
 #
 #####################################
 
@@ -64,11 +64,11 @@ elif  [ -n "$isRepoAdded" ] && [ -z "$isPkgInstalled" ]; then
         sudo apt-get update
        #installing the package
         sudo apt-get install jenkins -y
-        echo "****** Jenkins Installed Successfully! ********"
+        echo "                 ****** Jenkins Installed Successfully! ********"
 else 
-	echo " Jenkins is Already Installed. "
-	echo "Reloading the Jenkins.Service."
-	sudo systemctl reload jenkins.service
-	echo "*********Jenkins tool is ready to use!*****"
+	echo "        Jenkins is Already Installed. "
+	echo "   Please wait... Reloading the Jenkins Service."
+	sudo systemctl restart jenkins.service
+	echo "                 *********Jenkins tool is ready to use!*****"
 fi	
 
