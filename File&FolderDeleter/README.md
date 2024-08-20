@@ -4,5 +4,5 @@
 ## for  : all Linux Distribution
 
 #### Description; 
-           executing this script will remove all the files and folders in the users Present Directory  
+           executing this script will remove all the files and folders in the users Present Directory or Current Working Directory 
 
