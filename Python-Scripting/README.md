@@ -7,5 +7,9 @@
 
  * Insatll the Python and its package Manager
 
+ * Installing the boto3 package
+
+      pip install boto3
+   
       
  
