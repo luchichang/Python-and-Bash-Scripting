@@ -19,7 +19,10 @@ def list_ec2_instances():
         if  len(response["Reservations"]) == 0:
             print("No Instances are in the console")
         else:
-            print(f"Currently There are total of {response["Reservations"]["Instances"]}  EC2 Instances in the console")
+            instance_count=0
+            for reservation in response['Reservations']:
+                instance_count+=len(reservation['Instances'])
+            print(f"Currently There are total of {instance_count}  EC2 Instances in the console")
      except NoCredentialsError :
          print("Error: No AWS Credentials found. please configure your credentials")
      except PartialCredentialsError:
@@ -33,5 +36,11 @@ def list_ec2_instances():
      return 
 
 
-# calling the function
-list_ec2_instances()    
+def main():
+   # calling the function
+   list_ec2_instances()    
+
+
+# executes the main function if the script runs directly apart from importing 
+if __name__== "__main__":
+    main()
