@@ -35,4 +35,3 @@ def list_ec2_instances():
 
 # calling the function
 list_ec2_instances()    
-
