@@ -8,5 +8,6 @@
   * for Python script,
       * install python by clicking the link
           https://www.python.org/downloads/
+      * Execute the Script in your prefered IDE/Code Editor/ Terminal 
   * for bash Script,
        
