@@ -6,5 +6,7 @@
 ## Steps to execute the script
 
   * for Python script,
-  * for bash Script
+      * install python by clicking the link
+          https://www.python.org/downloads/
+  * for bash Script,
        
