@@ -5,7 +5,7 @@
 
 ## Flow Chart
 
-[FlowChart](assets/docker%20installation%20script.svg)
+![FlowChart](assets/docker%20installation%20script.svg)
 
 
 ## Execution 
