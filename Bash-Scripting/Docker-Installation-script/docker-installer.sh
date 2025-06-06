@@ -11,7 +11,7 @@ declare -a ubUnoffPackages=(
 isInteractive=1
 
 #displays once successfully docker software is installed
-sucMsg="docker installed successfully! \n run `sudo docker run hello-world` to verify Installation.\n \n Happy Learning :)" 
+sucMsg="docker installed successfully! \n\n run $ sudo docker run hello-world to verify Installation.\n \n Happy Learning :)" 
 
 declare -a rhUnoffPackages=(
     [0]=docker
@@ -78,7 +78,9 @@ ubuntuDistribution () {
     
     echo "INFO: Installing docker engine."
 
-    sudo apt-get install $(if [ $isInteractive -eq 0 ]; then echo "-y"; fi) docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && echo $sucMsg 
+    sudo apt update -y
+
+    sudo apt-get install $(if [ $isInteractive -eq 0 ]; then echo "-y"; fi) docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && echo -e $sucMsg 
     
 }
 
@@ -88,8 +90,9 @@ redhatDistribution () {
     echo "Adding Repo"
     sudo dnf install -y dnf-plugins-core
     sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+    sudo dnf update -y
     sudo dnf install $(if [ $isInteractive -eq 0 ]; then echo "-y"; fi) docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-    sudo systemctl enable --now docker && echo $sucMsg
+    sudo systemctl enable --now docker && echo -e $sucMsg
 }
 
 suseDistribution() {
@@ -97,9 +100,10 @@ suseDistribution() {
     rmUnoffPackage su
     echo "INFO: adding the repository"
     opensuseRepo="https://download.opensuse.org/repositories/security:/SELinux/openSUSE_Factory/security:SELinux.repo"
+    sudo sed -i 's/$releasever/9/g' /etc/yum.repos.d/docker-ce.repo
     sudo zypper addrepo $opensuseRepo && echo "INFO: repo added successfully"
     sudo zypper install $(if [ $isInteractive -eq 0 ]; then echo "-y"; fi) docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-    sudo systemctl enable --now docker && echo $sucMsg
+    sudo systemctl enable --now docker && echo -e $sucMsg
 }
 
 main () {
