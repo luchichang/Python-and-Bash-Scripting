@@ -23,7 +23,7 @@ curl -O https://raw.githubusercontent.com/luchichang/Python-and-Bash-Scripting/r
 ls -l docker-installer.sh
 ```
 <p align="center">
-<img src="./assets/image-1.png" alt="File Permission w/o x" width="300">
+<img src="./assets/image-1.png" alt="File Permission w/o x" width="80%">
 </p>
 <!-- ![file permission](./assets/image-1.png) -->
 
