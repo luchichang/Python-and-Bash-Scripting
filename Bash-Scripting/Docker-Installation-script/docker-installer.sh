@@ -7,8 +7,11 @@ declare -a ubUnoffPackages=(
     [3]=docker-doc
     [4]=podman-docker
 )
-# 0: false 1: true
+# 0: false, 1: true
 isInteractive=1
+
+#displays once successfully docker software is installed
+sucMsg="docker installed successfully! \n run `sudo docker run hello-world` to verify Installation.\n \n Happy Learning :)" 
 
 declare -a rhUnoffPackages=(
     [0]=docker
@@ -25,6 +28,13 @@ declare -a rhUnoffPackages=(
 
 declare -a suUnoffpackages=(
     [0]=docker
+    [1]=docker-client
+    [2]=docker-client-latest
+    [3]=docker-common
+    [4]=runc
+    [5]=docker-logrotate
+    [6]=docker-latest-logrotate
+    [7]=docker-engine
 )
 
 getDistribution () {
@@ -68,7 +78,7 @@ ubuntuDistribution () {
     
     echo "INFO: Installing docker engine."
 
-    sudo apt-get install $(if [ $isInteractive -eq 0 ]; then echo "-y"; fi) docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin  
+    sudo apt-get install $(if [ $isInteractive -eq 0 ]; then echo "-y"; fi) docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && echo $sucMsg 
     
 }
 
@@ -78,14 +88,18 @@ redhatDistribution () {
     echo "Adding Repo"
     sudo dnf install -y dnf-plugins-core
     sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
-    
+    sudo dnf install $(if [ $isInteractive -eq 0 ]; then echo "-y"; fi) docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo systemctl enable --now docker && echo $sucMsg
 }
 
 suseDistribution() {
     echo "WARN: Removing un official package"
     rmUnoffPackage su
     echo "INFO: adding the repository"
-
+    opensuseRepo="https://download.opensuse.org/repositories/security:/SELinux/openSUSE_Factory/security:SELinux.repo"
+    sudo zypper addrepo $opensuseRepo && echo "INFO: repo added successfully"
+    sudo zypper install $(if [ $isInteractive -eq 0 ]; then echo "-y"; fi) docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo systemctl enable --now docker && echo $sucMsg
 }
 
 main () {
@@ -107,7 +121,7 @@ main () {
     esac
 }
 
-if [[ $# -eq 1 && "$1" = "--non-interactive" ]]; then;
+if [[ $# -eq 1 && "$1" = "--non-interactive" ]]; then
     isInteractive=0
 fi;
     
